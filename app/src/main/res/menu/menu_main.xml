@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    // primer item del menu (el de salida de la app) que siempre esta presente visible en el ActionBar y con una banderita como icono (contiene un
+    // dialogo de confirmación)
+    <item
+        android:title="@string/item_1"
+        android:id="@+id/action_finish"
+        android:icon="@drawable/globosaerostaticos"
+        app:showAsAction="always"/>
+
+
+    // segundo item del menu(cargar una lista de la compra) que previamente hemos guardado por nosotros.
+    <item
+        android:title="@string/item_2"
+        android:id="@+id/action_cargarLista"
+        app:showAsAction="never"/>
+
+    // tercer item del menu (guardar una lista de la compra) que previamente hemos creado nosotros
+    <item
+        android:title="@string/item_3"
+        android:id="@+id/action_guardarLista"
+        app:showAsAction="never"/>
+
+
+
+
+
+</menu>

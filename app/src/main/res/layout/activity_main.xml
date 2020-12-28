@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="25dp"
+    tools:context=".MainActivity"
+    android:background="@color/white">
+
+
+
+    // creamos nuestro ActionBar que llamaremos my_toolbar con sus atributos
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/teal_200"
+        android:elevation="4dp"
+        android:theme="@style/Theme.ListView_App"
+        app:popupTheme="@style/Theme.ListView_App" />
+
+
+   // creamos nuestro EditText para recoger los productos de la lista de la compra
+    <EditText
+        android:id="@+id/edittext1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escriba un producto de la cesta de la compra"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:text=""
+        android:cursorVisible="true"
+        android:textSize="10pt"/>
+
+
+
+    // creamos el boton para añadir los productos desde el EditText a la lista de la compra
+    <Button
+        android:id="@+id/boton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingresar en la Lista"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/teal_200"
+        android:textColor="@color/black"/>
+
+
+   // creamos nuestra lista de la compra.
+    <ListView
+        android:id="@+id/listview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp" />
+
+
+</LinearLayout>

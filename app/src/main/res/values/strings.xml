@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ListaCompra_App</string> // nombre de la app
+    <string name="item_1">Salir App</string> // nombre del primer item del menu del ActionBar
+    <string name="item_2">Cargar Lista Compra</string> // nombre del segundo item del menu del ActionBar
+    <string name="item_3">Guardar Lista Compra</string> // //nombre del tercer item del menu del ActionBar
+</resources>
