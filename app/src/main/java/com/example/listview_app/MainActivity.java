@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,9 +25,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static android.app.Notification.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -132,9 +141,59 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_cargarLista:
                 Cargar_Lista();
+                // estableceremos el icono y el texto a mostrar en la barra de estado, y el titulo de la notificación
+                //. Con estos datos construiremos un objeto Notification llamado nBuilder
+                NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.finishflag)
+                        .setContentTitle(" ALERTA!! Datos Lista CARGADOS!!")
+                        .setContentText("Los Datos de la Lista cargados!!") ;
+                        Notification notificacion = nBuilder.build();
+                        // Como opciones adicionales, también podemos indicar por ejemplo que nuestra notificació
+                // desaparezca automáticamente de la bandeja del sistema cuando se pulsa sobre ella (FLAG_AUTO_CANCEL.)
+                // También podríamos indicar que al generarse la notificación el dispositivo debe emitir un sonido,
+                //vibrar o encender el LED de estado presente en muchos terminales (DEFAULT_SOUND,
+                //DEFAULT_VIBRATE o DEFAULT_LIGHTS)
+                notificacion.flags |= FLAG_AUTO_CANCEL;
+                notificacion.defaults |= DEFAULT_SOUND;
+                notificacion.defaults |= DEFAULT_VIBRATE;
+                //se lanza en la misma actividad principal
+                Intent notIntent = new Intent(MainActivity.this, MainActivity.class);
+                PendingIntent contIntent = PendingIntent.getActivity(MainActivity.this, 0, notIntent, 0);
+                nBuilder.setContentIntent(contIntent);
+                //Para generar notificaciones en la barra de estado del sistema, lo primero que debemos hacer es
+                //obtener una referencia al servicio de notificaciones de Android, a través de la clase
+               // NotificationManager. Utilizaremos para ello el método getSystemService() indicando como
+                //parámetro el identificador del servicio correspondiente, en este casoContext.NOTIFICATION_SERVICE
+                NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                nManager.notify(0, nBuilder.build());
                 break;
             case R.id.action_guardarLista:
                Guardar_Lista();
+                // estableceremos el icono y el texto a mostrar en la barra de estado, y el titulo de la notificación
+                //. Con estos datos construiremos un objeto Notification llamado nBuilder
+                NotificationCompat.Builder nBuilder2 = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.finishflag)
+                        .setContentTitle(" ALERTA!! Datos Lista GUARDADOS")
+                        .setContentText("Los Datos de la Lista se ha guardado!!") ;
+                Notification notificacion2 = nBuilder2.build();
+                // Como opciones adicionales, también podemos indicar por ejemplo que nuestra notificació
+                // desaparezca automáticamente de la bandeja del sistema cuando se pulsa sobre ella (FLAG_AUTO_CANCEL.)
+                // También podríamos indicar que al generarse la notificación el dispositivo debe emitir un sonido,
+                //vibrar o encender el LED de estado presente en muchos terminales (DEFAULT_SOUND,
+                //DEFAULT_VIBRATE o DEFAULT_LIGHTS)
+                notificacion2.flags |= FLAG_AUTO_CANCEL;
+                notificacion2.defaults |= DEFAULT_SOUND;
+                notificacion2.defaults |= DEFAULT_VIBRATE;
+                //se lanza en la misma actividad principal
+                Intent notIntent2 = new Intent(MainActivity.this, MainActivity.class);
+                PendingIntent contIntent2 = PendingIntent.getActivity(MainActivity.this, 0, notIntent2, 0);
+                nBuilder2.setContentIntent(contIntent2);
+                //Para generar notificaciones en la barra de estado del sistema, lo primero que debemos hacer es
+                //obtener una referencia al servicio de notificaciones de Android, a través de la clase
+                // NotificationManager. Utilizaremos para ello el método getSystemService() indicando como
+                //parámetro el identificador del servicio correspondiente, en este casoContext.NOTIFICATION_SERVICE
+                NotificationManager nManager2 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                nManager2.notify(0, nBuilder2.build());
                 break;
 
         }
@@ -150,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
            listaElementos.add(ele.getKey()+" : " +ele.getValue().toString());
        }
        //valores.setText("lista",);
-       Toast.makeText(this,"lista de Compra se ha cargado",Toast.LENGTH_LONG).show();
+
     }
 
 
