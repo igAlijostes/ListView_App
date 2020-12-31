@@ -11,6 +11,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // le decimos al sistema que carge nuestro layout activity.main (xml) en nuestra app
         setContentView(R.layout.activity_main);
+
 
         //instaciamos nuestro ActionBar( mytoolbar) que se encuentra en el archivo activity_main.xml y llamamos al metodo setSupportActionBar
         // y le pasamos nuestra ActionBar como la app de la Actividad
@@ -140,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_cargarLista:
+                // aqui implementados en metodo creado más abajo para cargar una lista guardada al dar dl boton
+                // de cargar en el menu del ActionBar
                 Cargar_Lista();
                 // estableceremos el icono y el texto a mostrar en la barra de estado, y el titulo de la notificación
                 //. Con estos datos construiremos un objeto Notification llamado nBuilder
@@ -168,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
                 nManager.notify(0, nBuilder.build());
                 break;
             case R.id.action_guardarLista:
+                // aqui implementados en metodo creado más abajo para guardar una lista realizada por nosotros al dar dl boton
+                // de guardar en el menu del ActionBar
                Guardar_Lista();
                 // estableceremos el icono y el texto a mostrar en la barra de estado, y el titulo de la notificación
                 //. Con estos datos construiremos un objeto Notification llamado nBuilder
@@ -221,12 +231,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor elemento=preferencias.edit();
         elemento.putString("",valores.getText().toString());
         elemento.commit();
-        valores.setText("");
-        Toast.makeText(this,"lista de Compra guardada",Toast.LENGTH_LONG).show();
     }
-
-
-
 
 }
 
