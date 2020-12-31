@@ -222,8 +222,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     public void Guardar_Lista (){
         SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
         listaElementos.add(valores.getText().toString());
