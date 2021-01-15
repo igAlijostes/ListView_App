@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     ListView list;
     Button Addboton;
     EditText valores;
-    ArrayList<String> listaElementos;
+    ArrayList<String> listaElementos,productos_lista;
      ArrayAdapter<String> adapter;
 
 
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
        // metodo que guarda una lista creada anteriormente
     public void Guardar_Lista (){
-        ArrayList<String> productos_lista=new ArrayList<String>();
+        productos_lista=new ArrayList<String>();
         SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
         SharedPreferences.Editor miEditor=preferencias.edit();
         miEditor.clear();
