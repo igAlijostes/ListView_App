@@ -213,24 +213,27 @@ public class MainActivity extends AppCompatActivity {
 
 // metodo que carga una lista previamente guardada
    public void Cargar_Lista(){
+       productos_lista=new ArrayList<String>();
        SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
        listaElementos.clear();
+       productos_lista.add(valores.getText().toString());
        for(int i=0;i <= listaElementos.size();i++) {
            String productos_lista=preferencias.getString(String.valueOf(i),"productos_lista");
        }
+
        }
 
 
 
        // metodo que guarda una lista creada anteriormente
     public void Guardar_Lista (){
-        productos_lista=new ArrayList<String>();
+
         SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
         SharedPreferences.Editor miEditor=preferencias.edit();
         miEditor.clear();
         for(int i=0;i <= listaElementos.size();i++) {
             miEditor.putString(String.valueOf(i),valores.getText().toString());
-            productos_lista.add(valores.getText().toString());
+
         }
         miEditor.commit();
     }
