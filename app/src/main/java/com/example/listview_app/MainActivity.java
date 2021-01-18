@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     ListView list;
     Button Addboton;
     EditText valores;
-    ArrayList<String> listaElementos,productos_lista;
+    ArrayList<String> listaElementos;
      ArrayAdapter<String> adapter;
 
 
@@ -211,29 +211,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
 // metodo que carga una lista previamente guardada
    public void Cargar_Lista(){
-       productos_lista=new ArrayList<String>();
-       SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
+        // SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
        listaElementos.clear();
-       productos_lista.add(valores.getText().toString());
-       for(int i=0;i <= listaElementos.size();i++) {
-           String productos_lista=preferencias.getString(String.valueOf(i),"productos_lista");
+       Integer tam=Integer.valueOf(listaElementos.size());
+       for(int i=0;i <= tam-1;i++) {
+           listaElementos.add(String.valueOf(i));
        }
-
+       adapter.notifyDataSetChanged();
        }
-
-
 
        // metodo que guarda una lista creada anteriormente
     public void Guardar_Lista (){
-
         SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
         SharedPreferences.Editor miEditor=preferencias.edit();
-        miEditor.clear();
+        miEditor.putString("numeroElementos",String.valueOf(listaElementos.size()));
         for(int i=0;i <= listaElementos.size();i++) {
-            miEditor.putString(String.valueOf(i),valores.getText().toString());
-
+            miEditor.putString(String.valueOf(i),listaElementos.get(i));
         }
         miEditor.commit();
     }
