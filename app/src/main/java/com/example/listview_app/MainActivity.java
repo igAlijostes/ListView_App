@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
      ArrayAdapter<String> adapter;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,8 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 // aqui implementados en metodo creado más abajo para cargar una lista guardada al dar dl boton
                 // de cargar en el menu del ActionBar
                 Cargar_Lista();
-                // estableceremos el icono y el texto a mostrar en la barra de estado, y el titulo de la notificación
-                //. Con estos datos construiremos un objeto Notification llamado nBuilder
+                //  Lanzamos la notificación de cargar_lista para que se notifque en el ActionBar.
                 NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.finishflag)
                         .setContentTitle(" ALERTA!! Datos Lista CARGADOS!!")
@@ -179,8 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 // aqui implementados en metodo creado más abajo para guardar una lista realizada por nosotros al dar dl boton
                 // de guardar en el menu del ActionBar
                Guardar_Lista();
-                // estableceremos el icono y el texto a mostrar en la barra de estado, y el titulo de la notificación
-                //. Con estos datos construiremos un objeto Notification llamado nBuilder
+                // Lanzamos la notificación de guardar_lista para que se notifque en el ActionBar.
                 NotificationCompat.Builder nBuilder2 = new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.finishflag)
                         .setContentTitle(" ALERTA!! Datos Lista GUARDADOS")
@@ -215,11 +215,11 @@ public class MainActivity extends AppCompatActivity {
 
 // metodo que carga una lista previamente guardada
    public void Cargar_Lista(){
-        // SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
+       SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
+       Integer tam=Integer.valueOf(preferencias.getString("numeroElementos",""));
        listaElementos.clear();
-       Integer tam=Integer.valueOf(listaElementos.size());
-       for(int i=0;i <= tam-1;i++) {
-           listaElementos.add(String.valueOf(i));
+       for(int i=0;i <tam ;i++) {
+           listaElementos.add(preferencias.getString(String.valueOf(i),""));
        }
        adapter.notifyDataSetChanged();
        }
@@ -228,11 +228,17 @@ public class MainActivity extends AppCompatActivity {
     public void Guardar_Lista (){
         SharedPreferences preferencias= getSharedPreferences("ListaCompra",MODE_PRIVATE);
         SharedPreferences.Editor miEditor=preferencias.edit();
+        Log.w("Guardar Lista","antes clear");
+        miEditor.clear();
+        Log.w("Guardar Lista","despues clear");
         miEditor.putString("numeroElementos",String.valueOf(listaElementos.size()));
-        for(int i=0;i <= listaElementos.size();i++) {
+        for(int i=0;i < listaElementos.size();i++) {
             miEditor.putString(String.valueOf(i),listaElementos.get(i));
+            miEditor.commit();
         }
-        miEditor.commit();
+
+
+
     }
 
 }
